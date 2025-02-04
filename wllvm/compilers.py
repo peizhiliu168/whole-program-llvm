@@ -352,13 +352,18 @@ def buildAndAttachBitcode(builder, af):
 
 riscv_args = []
 if os.getenv('VLG_ARCH_RISCV') is not None:
+    print(f"WLLVM ==== {os.getenv('VLG_ARCH_RISCV')}")
     riscv_toolchain_path = "/opt/riscv"
     if os.getenv("VLG_RISCV_TOOLCHAIN_PATH") is not None:
+
         riscv_toolchain_path = os.getenv("VLG_RISCV_TOOLCHAIN_PATH")
 
     riscv_argstring = f"--target=riscv64-unknown-linux-gnu -mcmodel=medany -march=rv64g --sysroot={riscv_toolchain_path}/sysroot --gcc-toolchain={riscv_toolchain_path}"
 
+
     riscv_args = riscv_argstring.split(" ")
+
+    print(f"WLLVM ====== riscv_args={riscv_args}")
 
 def linkFiles(builder, objectFiles):
     af = builder.getBitcodeArglistFilter()
