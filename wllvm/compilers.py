@@ -375,6 +375,8 @@ def linkFiles(builder, objectFiles):
     cc.extend(riscv_args)
     cc.extend(['-o', outputFile])
     proc = Popen(cc)
+    print(f"WLLVM ===== link {cc}")
+
     rc = proc.wait()
     if rc != 0:
         _logger.warning('Failed to link "%s"', str(cc))
@@ -390,6 +392,7 @@ def buildBitcodeFile(builder, srcFile, bcFile):
     bcc.extend(['-o', bcFile])
     _logger.debug('buildBitcodeFile: %s', bcc)
     proc = Popen(bcc)
+    print(f"WLLVM ===== bitcode {bcc}")
     rc = proc.wait()
     if rc != 0:
         _logger.warning('Failed to generate bitcode "%s" for "%s"', bcFile, srcFile)
@@ -404,6 +407,7 @@ def buildObjectFile(builder, srcFile, objFile):
     cc.extend(['-c', '-o', objFile])
     _logger.debug('buildObjectFile: %s', cc)
     proc = Popen(cc)
+    print(f"WLLVM ===== object {cc}")
     rc = proc.wait()
     if rc != 0:
         _logger.warning('Failed to generate object "%s" for "%s"', objFile, srcFile)
